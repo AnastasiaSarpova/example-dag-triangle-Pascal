@@ -1,8 +1,9 @@
 from airflow import DAG
-from airflow.operators.python import PythonOperator
+from airflow.decorators import task
 from datetime import datetime, timedelta
 
-def triangle_Pacal(n=10):
+@task(task_id="print_triangle")
+def triangle_Pacsal(n=10):
     triangle = []
     for i in range(n):
         triangle.append([1]+[0]*n)
@@ -22,17 +23,13 @@ default_args = {
     'email_on_retry': False
 }
 
-dag = DAG(
-    'example_dag_triangle_Pascal',
+with DAG(
+    dag_id='example_dag_triangle_Pascal',
     default_args=default_args,
     description='Run triangle Pascal',
     schedule_interval=timedelta(days=1),
     catchup=False
-)
+) as dag:
 
-python_task = PythonOperator(
-    task_id='python_task',
-    python_callable=triangle_Pacal,
-    dag=dag
-)
+    run_this = triangle_Pacsal()
 

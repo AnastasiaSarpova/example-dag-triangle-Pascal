@@ -19,6 +19,7 @@ default_args = {
     'owner' : 'airflow',
     'depends_on_past' : False,
     'start_date' : datetime(2024, 11, 26), 
+    'schedule_interval' : '44 11 * * *
     'email_on_failure' : False,
     'email_on_retry': False
 }

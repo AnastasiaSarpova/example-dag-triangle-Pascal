@@ -28,7 +28,6 @@ with DAG(
     dag_id='example_dag_triangle_Pascal',
     default_args=default_args,
     description='Run triangle Pascal',
-    schedule_interval=timedelta(days=1),
     catchup=False
 ) as dag:
 
